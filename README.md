@@ -14,4 +14,4 @@ A web-based currency converter built using AngularJS.
 - Exchange Rate API
 
 ## Live Demo
-(Add your Netlify link here)
+https://sowmiya16-web.github.io/currency-converter/
