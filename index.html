@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="currencyApp">
+<head>
+    <title>Currency Converter</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body ng-controller="CurrencyController">
+
+<div class="container">
+
+    <h1>💱 Currency Converter</h1>
+
+    <div class="input-group">
+        <label>Amount</label>
+        <input type="number" ng-model="amount" placeholder="Enter amount">
+    </div>
+
+    <div class="row">
+
+        <!-- FROM -->
+        <div class="input-group dropdown">
+            <label>From</label>
+
+            <input type="text"
+                   ng-model="fromSearch"
+                   ng-focus="showFrom = true"
+                   placeholder="Select or type currency">
+
+            <div class="dropdown-list" ng-show="showFrom">
+                <div ng-repeat="c in currencies | filter:fromSearch"
+                     ng-click="selectFrom(c)">
+                    {{c}}
+                </div>
+            </div>
+        </div>
+
+        <!-- TO -->
+        <div class="input-group dropdown">
+            <label>To</label>
+
+            <input type="text"
+                   ng-model="toSearch"
+                   ng-focus="showTo = true"
+                   placeholder="Select or type currency">
+
+            <div class="dropdown-list" ng-show="showTo">
+                <div ng-repeat="c in currencies | filter:toSearch"
+                     ng-click="selectTo(c)">
+                    {{c}}
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <button ng-click="swap()">🔄 Swap</button>
+
+    <button ng-click="convert()">Convert</button>
+
+    <h2 class="result">
+        {{ amount }} {{fromCurrency}} = {{ result }} {{toCurrency}}
+    </h2>
+
+    <p class="note">*Rates are live and may slightly vary from market values</p>
+
+    <hr>
+
+    <h3>📊 Conversion History</h3>
+
+    <div class="history">
+        <div class="card" ng-repeat="item in history">
+            {{item.amount}} {{item.from}} → {{item.to}}
+            <br>
+            <strong>{{item.result}}</strong>
+        </div>
+    </div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>
